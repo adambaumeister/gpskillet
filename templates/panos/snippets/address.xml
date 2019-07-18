@@ -1,0 +1,6 @@
+<entry name="{{ GP_PORTAL_IP }}">
+    <ip-netmask>{{ GP_PORTAL_IP }}</ip-netmask>
+</entry>
+<entry name="{{ GP_EXTERNAL_GW_ADDR }}">
+    <ip-netmask>{{ GP_EXTERNAL_GW_ADDR }}</ip-netmask>
+</entry>

@@ -1,0 +1,13 @@
+  <entry name="{{ GP_ID }}_ldap">
+    <server>
+      <entry name="{{ GP_ID }}_ldap">
+        <address>{{ LDAP_SERVER }}</address>
+        <port>389</port>
+      </entry>
+    </server>
+    <ldap-type>active-directory</ldap-type>
+    <bind-dn>{{ LDAP_BINDDN }}</bind-dn>
+    <bind-password>{{ LDAP_BINDPASSWORD|md5_hash }}</bind-password>
+    <ssl>no</ssl>
+    <base>{{ LDAP_BASEDN }}</base>
+  </entry>

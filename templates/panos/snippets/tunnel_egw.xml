@@ -1,0 +1,31 @@
+ <entry name="{{ GP_ID }}_egw_tunnel">
+    <local-address>
+      <ip>
+        <ipv4>{{ GP_EXTERNAL_GW_ADDR }}</ipv4>
+      </ip>
+      <interface>{{ GP_EXTERNAL_GW_INTERFACE }}</interface>
+      <ip-address-family>ipv4</ip-address-family>
+    </local-address>
+    <client>
+      <exclude-video-traffic>
+        <applications/>
+        <enabled>no</enabled>
+      </exclude-video-traffic>
+      <dns-server>
+        <primary>{{ CLIENT_PRIMARY_DNS }}</primary>
+        <secondary>{{ CLIENT_SECONDARY_DNS }}</secondary>
+      </dns-server>
+        <dns-suffix>
+            {% for member in CLIENT_DNS_SUFFIX %}
+          <member>{{ member }}</member>
+            {% endfor %}
+        </dns-suffix>
+    </client>
+    <ipsec>
+      <third-party-client>
+        <enable>no</enable>
+      </third-party-client>
+    </ipsec>
+    <ip-pool/>
+    <tunnel-interface>{{ TUNNEL_INTERFACE }}</tunnel-interface>
+  </entry>

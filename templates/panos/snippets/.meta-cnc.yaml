@@ -1,0 +1,150 @@
+# snippets is used to load a full NGFW configuration
+
+# snippet folder name
+name: skillet_panos_v90
+# label used for menu selection
+label: GlobalProtect skillets
+description: LDAP based GlobalProtect
+# type of device configuration
+type: panos
+
+# grouping of like snippets for dynamic menu creation in pan-cnc
+labels:
+  service_type: gp_skillet
+  collection:
+   - GlobalProtect
+
+# Text block that will display prior to the push of the snippet
+disclaimer: |
+  The value provided for GP_PORTAL_IP ({{ GP_PORTAL_IP }}) and GP_EXTERNAL_GW_ADDR (({{ GP_PORTAL_IP }})
+  must be valid IP addresses already configured on the firewall.
+
+
+# variables used in the configuration templates
+# type_hint defines the form field type in pan-cnc
+variables:
+  - name: GP_ID
+    description: Shorthand name of GlobalProtect configuration
+    default: gp_users
+    type_hint: text
+
+  - name: GP_PORTAL_IP
+    description: IP Address of GP Portal
+    default: 10.10.10.10
+    type_hint: text
+
+  - name: GP_PORTAL_INT
+    description: Interface for portal IP
+    default: ethernet1/1
+    type_hint: text
+
+  - name: GP_EXTERNAL_GW_ADDR
+    description: IP Address of GlobalProtect External Gateway
+    default: 10.10.10.11
+    type_hint: text
+
+  - name: GP_EXTERNAL_GW_DNS
+    description: FQDN of GlobalProtect EGW
+    default: egw.org.com
+    type_hint: text
+
+  - name: GP_EXTERNAL_GW_INTERFACE
+    description: Interfacd for External Gateway
+    default: ethernet1/1
+    type_hint: text
+
+  - name: LDAP_SERVER
+    description: IP Address of Active directory server
+    default: 192.168.168.168
+    type_hint: text
+
+  - name: LDAP_BINDDN
+    description: Username to connect to Active directory for authentication
+    default: userid@org.com
+    type_hint: text
+
+  - name: LDAP_BINDPASSWORD
+    description: Password to connect to active directory for authentication
+    default: don'tputtherealpasswordhere!
+    type_hint: text
+
+  - name: LDAP_BASEDN
+    description: Base OU
+    default: DC=org,DC=com
+    type_hint: text
+
+  - name: ALLOWED_GROUPS
+    description: Allowed AD user groups
+    default:
+      - all
+    type_hint: list
+
+  - name: TUNNEL_INTERFACE
+    description: Tunnel interface to use
+    default: tunnel.10
+    type_hint: text
+
+  - name: TUNNEL_ZONE
+    description: Zone for tunnel
+    default: INSIDE
+    type_hint: text
+
+  - name: IP_POOL
+    description: IP address pool for users
+    default: 10.100.100.0/24
+    type_hint: text
+
+  - name: CLIENT_PRIMARY_DNS
+    description: Primary DNS server for users
+    default: 8.8.8.8
+    type_hint: text
+
+  - name: CLIENT_SECONDARY_DNS
+    description: Secondary DNS server for users
+    default: 8.8.4.4
+    type_hint: text
+
+  - name: CLIENT_DNS_SUFFIX
+    description: DNS Search suffix for users
+    default:
+      - org.com
+    type_hint: text
+
+  - name: PORTAL_SSL_PROFILE
+    description: SSL Profile for certificates used by GP PORTAL
+    default: None
+    type_hint: text
+
+  - name: EGW_SSL_PROFILE
+    description: SSL Profile for external gateway
+    default: None
+    type_hint: text
+
+snippets:
+  - name: address
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address
+    file: address.xml
+
+  - name: tunnel
+    xpath: /config/devices/entry[@name='localhost.localdomain']/network/interface/tunnel/units
+    file: tunnels.xml
+
+  - name: tunnel_egw
+    xpath: /config/devices/entry[@name='localhost.localdomain']/network/tunnel/global-protect-gateway
+    file: tunnel_egw.xml
+
+  - name: ldap_profile
+    xpath: /config/shared/server-profile/ldap
+    file: ldap_profile.xml
+
+  - name: auth_profile
+    xpath: /config/shared/authentication-profile
+    file: auth_profile.xml
+
+  - name: portal
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/global-protect/global-protect-portal
+    file: gp_portal.xml
+
+  - name: egw
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/global-protect/global-protect-gateway
+    file: gp_egw.xml

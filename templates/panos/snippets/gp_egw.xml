@@ -1,0 +1,72 @@
+  <entry name="{{ GP_ID }}_egw">
+    <roles>
+      <entry name="default">
+        <login-lifetime>
+          <days>30</days>
+        </login-lifetime>
+        <inactivity-logout>
+          <hours>3</hours>
+        </inactivity-logout>
+        <disconnect-on-idle>
+          <minutes>180</minutes>
+        </disconnect-on-idle>
+      </entry>
+    </roles>
+    <client-auth>
+      <entry name="{{ GP_ID }}_auth_profile">
+        <os>Any</os>
+        <authentication-profile>ldap-all</authentication-profile>
+        <authentication-message>Enter login credentials</authentication-message>
+        <user-credential-or-client-cert-required>yes</user-credential-or-client-cert-required>
+        <username-label>Username</username-label>
+        <password-label>Password</password-label>
+      </entry>
+    </client-auth>
+    <remote-user-tunnel-configs>
+      <entry name="{{ GP_ID }}">
+        <split-tunneling>
+          <include-domains>
+            <list/>
+          </include-domains>
+          <exclude-domains>
+            <list/>
+          </exclude-domains>
+          <access-route/>
+          <exclude-access-route/>
+          <include-applications/>
+          <exclude-applications/>
+        </split-tunneling>
+        <authentication-override>
+          <generate-cookie>no</generate-cookie>
+        </authentication-override>
+        <source-address>
+          <ip-address/>
+          <region/>
+        </source-address>
+        <source-user>
+          <member>any</member>
+        </source-user>
+        <authentication-server-ip-pool/>
+        <ip-pool>
+          <member>{{ IP_POOL }}</member>
+        </ip-pool>
+        <dns-server>
+          <member>{{ CLIENT_PRIMARY_DNS }}</member>
+          <member>{{ CLIENT_SECONDARY_DNS }}</member>
+        </dns-server>
+        <dns-suffix>
+            {% for member in CLIENT_DNS_SUFFIX %}
+          <member>{{ member }}</member>
+            {% endfor %}
+        </dns-suffix>
+        <os>
+          <member>any</member>
+        </os>
+        <retrieve-framed-ip-address>no</retrieve-framed-ip-address>
+        <no-direct-access-to-local-network>no</no-direct-access-to-local-network>
+      </entry>
+    </remote-user-tunnel-configs>
+    <ssl-tls-service-profile>{{ EGW_SSL_PROFILE }}</ssl-tls-service-profile>
+    <tunnel-mode>yes</tunnel-mode>
+    <remote-user-tunnel>{{ TUNNEL_INTERFACE }}</remote-user-tunnel>
+  </entry>

@@ -1,0 +1,15 @@
+  <entry name="{{ GP_ID }}_auth_profile">
+    <multi-factor-auth>
+      <mfa-enable>no</mfa-enable>
+    </multi-factor-auth>
+    <method>
+      <ldap>
+        <server-profile>{{ GP_ID }}_ldap</server-profile>
+      </ldap>
+    </method>
+    <allow-list>
+        {% for member in ALLOWED_GROUPS %}
+      <member>{{ member }}</member>
+        {% endfor %}
+    </allow-list>
+  </entry>
