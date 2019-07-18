@@ -108,7 +108,7 @@ variables:
     description: DNS Search suffix for users
     default:
       - org.com
-    type_hint: text
+    type_hint: list
 
   - name: PORTAL_SSL_PROFILE
     description: SSL Profile for certificates used by GP PORTAL
@@ -120,6 +120,11 @@ variables:
     default: None
     type_hint: text
 
+  - name: VR
+    description: Virtual router to use for tunnel interface
+    default: default
+    type_hint: text
+
 snippets:
   - name: address
     xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address
@@ -128,6 +133,14 @@ snippets:
   - name: tunnel
     xpath: /config/devices/entry[@name='localhost.localdomain']/network/interface/tunnel/units
     file: tunnels.xml
+
+  - name: zone
+    xpath: /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/zone
+    file: zone.xml
+
+  - name: virtual_router
+    xpath: /config/devices/entry[@name='localhost.localdomain']/network/virtual-router
+    file: virtual_router.xml
 
   - name: tunnel_egw
     xpath: /config/devices/entry[@name='localhost.localdomain']/network/tunnel/global-protect-gateway

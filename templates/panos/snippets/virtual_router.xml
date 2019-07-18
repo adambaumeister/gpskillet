@@ -1,0 +1,5 @@
+      <entry name="{{ VR }}">
+        <interface>
+          <member>{{ TUNNEL_INTERFACE }}</member>
+        </interface>
+      </entry>
