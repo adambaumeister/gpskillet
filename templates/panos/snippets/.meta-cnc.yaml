@@ -1,7 +1,7 @@
 # snippets is used to load a full NGFW configuration
 
 # snippet folder name
-name: skillet_panos_v90
+name: gpskillet_panos_v90
 # label used for menu selection
 label: GlobalProtect skillets
 description: LDAP based GlobalProtect
