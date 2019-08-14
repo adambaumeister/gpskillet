@@ -1,9 +1,10 @@
 # GlobalProtect Setup Skillet
 ## Test matrix
-| Type          | 8.0           | 8.1  | 9.0 |
+| Version(branch)          | 8.0           | 8.1(panos_v8.1)  | 9.0(master) |
 | ------------- |:-------------:| -----:| --- |
 | Panorama     | N | N| N |
-| Panos      | N| N| Y |
+| Panos      | N| Y| Y |
+
 
 ## Description
 Sets up a basic GlobalProtect configuration with one portal, one EGW, and LDAP authentication.
