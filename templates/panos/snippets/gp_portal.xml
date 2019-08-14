@@ -8,9 +8,8 @@
       </local-address>
       <client-auth>
         <entry name="{{ GP_ID }}_auth_profile">
-          <user-credential-or-client-cert-required>no</user-credential-or-client-cert-required>
           <os>Any</os>
-          <authentication-profile>ldap-all</authentication-profile>
+          <authentication-profile>{{ GP_ID }}_auth_profile</authentication-profile>
           <authentication-message>Enter login credentials</authentication-message>
           <username-label>Username</username-label>
           <password-label>Password</password-label>

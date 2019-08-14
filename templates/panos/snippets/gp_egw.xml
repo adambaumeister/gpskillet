@@ -15,9 +15,8 @@
     <client-auth>
       <entry name="{{ GP_ID }}_auth_profile">
         <os>Any</os>
-        <authentication-profile>ldap-all</authentication-profile>
+        <authentication-profile>{{ GP_ID }}_auth_profile</authentication-profile>
         <authentication-message>Enter login credentials</authentication-message>
-        <user-credential-or-client-cert-required>yes</user-credential-or-client-cert-required>
         <username-label>Username</username-label>
         <password-label>Password</password-label>
       </entry>
@@ -39,10 +38,6 @@
         <authentication-override>
           <generate-cookie>no</generate-cookie>
         </authentication-override>
-        <source-address>
-          <ip-address/>
-          <region/>
-        </source-address>
         <source-user>
           <member>any</member>
         </source-user>
@@ -50,15 +45,6 @@
         <ip-pool>
           <member>{{ IP_POOL }}</member>
         </ip-pool>
-        <dns-server>
-          <member>{{ CLIENT_PRIMARY_DNS }}</member>
-          <member>{{ CLIENT_SECONDARY_DNS }}</member>
-        </dns-server>
-        <dns-suffix>
-            {% for member in CLIENT_DNS_SUFFIX %}
-          <member>{{ member }}</member>
-            {% endfor %}
-        </dns-suffix>
         <os>
           <member>any</member>
         </os>
